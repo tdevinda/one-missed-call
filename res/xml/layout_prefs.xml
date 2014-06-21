@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <CheckBoxPreference
+        android:key="pref_includeNumber"
+        android:title="@string/pref_includeNumberInSMSTitle"
+        android:summary="@string/pref_includeNumberInSMSDesc"
+        android:defaultValue="true" />
+    
+    <CheckBoxPreference
+        android:key="pref_callbackOption"
+        android:title="@string/pref_callImmediatelyOrNotTitle"
+        android:summary="@string/pref_callImmediatelyOrNotDesc"
+        android:defaultValue="true" />
+	
+    <CheckBoxPreference
+        android:key="pref_useWordsForNumbers"
+        android:title="@string/pref_useWordsForCountersTitle"
+        android:summary="@string/pref_useWordsForCountersDesc"
+        android:defaultValue="true" />
+    
+    <CheckBoxPreference
+        android:key="pref_blockAds"
+        android:title="@string/pref_blockAdsTitle"
+        android:summary="@string/pref_blockAdsDesc"
+        android:defaultValue="true" />
+    
+    <CheckBoxPreference
+        android:key="pref_enableMCA"
+        android:title="@string/pref_enableMCATitle"
+        android:summary="@string/pref_enableMCADesc"
+        android:defaultValue="true" />
+</PreferenceScreen>
