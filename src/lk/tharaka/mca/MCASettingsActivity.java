@@ -2,12 +2,8 @@ package lk.tharaka.mca;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.util.Log;
 
 public class MCASettingsActivity extends PreferenceActivity {
 	
@@ -15,25 +11,34 @@ public class MCASettingsActivity extends PreferenceActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		addPreferencesFromResource(R.xml.layout_prefs);
-		ArrayList<MissedCall> calls = new ArrayList<MissedCall>();
-		MissedCall call = new MissedCall();
-		call.count = 1;
-		call.number = "773336050";
-		call.date = "today";
 		
-		calls.add(call);
+		MessageScraper scraper = new MobitelMessageScraper();
+		String dummyMultiple = "You have missed 1 call from 0117102317 at 14-06-27,05:07PM; 1 call from 0773336050 at 14-06-27,05:07PM;";
+		String dummySingle = "You have missed 1 call from 0112653782 at 14-06-22,04:06PM;Stand a change to win a micro panda car wth mTunes. Dial 777 to take part. T&C Apply.";
 		
-		MissedCall call2 = new MissedCall();
-		call2.count = 1;
-		call2.number = "777336890";
-		call2.date = "today";
+		String sms = dummySingle;
+		MCACommon common = new MCACommon(getApplicationContext());
+		ArrayList<MissedCall> missedCalls = scraper.getMissedCallsFromSMS(sms);
+		if(missedCalls != null) {
+			common.insertSMSInDatabase(
+					scraper.getMissedCallAlertSMSSenderName(), 
+					scraper.getSMSFromMissedCalls(missedCalls, getApplicationContext()));
+		} else {
+			//there is no implementation for this operator. we write the SMS back! But we must show the alert notification.
+			common.insertSMSInDatabase(scraper.getMissedCallAlertSMSSenderName(), sms);
+		}
+
+		common.addNotification(missedCalls, scraper.getMissedCallAlertSMSSenderName());
 		
-		calls.add(call2);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
 		
-		MCACommon common = new MCACommon();
-		common.addNotification(calls, getApplicationContext());
-		
+		finish();
 	}
 	
 	

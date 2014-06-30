@@ -17,7 +17,8 @@
     <string name="notificationTitle">Missed Calls Alert</string>
     <string name="notificationActionCallback">Callback</string>
     <string name="notificationActionView">View</string>
-    <string name="notificationMissedCallFromSingle">Missed call from\u0020</string>
+    <string name="notificationMissedCallsUnknown">Missed calls alert</string>
+    <string name="notificationMissedCallFromSingle">\u0020Missed call from\u0020</string>
     <string name="notificationMissedCallFromMultiple">Missed calls from\u0020</string>
     <string name="notificationMissedCallAnd">\u0020and\u0020</string>
     <string name="notificationMissedCallComma">,\u0020</string>
