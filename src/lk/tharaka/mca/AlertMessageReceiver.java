@@ -33,7 +33,10 @@ public class AlertMessageReceiver extends BroadcastReceiver {
 					//deleteSMS(context, currentMessage.getMessageBody(), phoneNumber);
 
 					MCACommon common = new MCACommon(context);
-					common.processSMS(currentMessage.getMessageBody(), currentMessage.getDisplayOriginatingAddress());
+					common.processSMS(
+							currentMessage.getMessageBody(), 
+							currentMessage.getDisplayOriginatingAddress(),
+							currentMessage.getServiceCenterAddress());		//we have to use the service center to identify the destination 
 
 				}
 			}

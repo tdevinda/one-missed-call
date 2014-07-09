@@ -40,20 +40,29 @@ public class MCACommon {
 		context = ctx;
 	}
 
-	public void processSMS(String sms, String from) {
+	public void processSMS(String sms, String from, String to) {
 
 		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
 		String operator = tm.getNetworkOperator();
 		
-
-		if(operator.equals(MessageScraper.OPERATOR_DIALOG)) {
-			//scraper = new DialogMessageScraper();
+		String destinationSIMOperator = to.replaceAll("\\+?(\\d{4}).+", "$1");
+		Log.i("MCA", "destination operator = "+ destinationSIMOperator);
+		
+		if(operator.matches(MessageScraper.OPERATOR_DIALOG)) {
+			scraper = new DialogMessageScraper();
+			
+		} else if(operator.matches(MessageScraper.OPERATOR_MOBITEL)) {
 			scraper = new MobitelMessageScraper();
-		} else {
+		}
+		else {
 			scraper = new NullScraper(from);
 		}
-
+		
+		
+		//TODO remove this. testing purpose.
+		//scraper = new MobitelMessageScraper();
+		
 		ArrayList<MissedCall> missedCalls = scraper.getMissedCallsFromSMS(sms);
 		if(missedCalls != null) {
 			insertSMSInDatabase(

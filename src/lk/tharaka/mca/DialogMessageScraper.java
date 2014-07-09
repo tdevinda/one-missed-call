@@ -84,7 +84,7 @@ public class DialogMessageScraper implements MessageScraper {
 			}
 			
 			output = callCounter
-					+ context.getString(R.string.messageMissedCallSimpleLetterStart) + ((call.count > 1)?"s ":" ") 
+					+ context.getString(R.string.messageMissedCallSimpleLetterStart) + ((call.count > 1)?"s":"") 
 					+ context.getString(R.string.messageFrom) + common.getNameFor(call.number) 
 					+ calledUserNumberPart
 					+ context.getString(R.string.messageOn) + call.date;
@@ -109,7 +109,7 @@ public class DialogMessageScraper implements MessageScraper {
 				}
 				
 				
-				output += callCounter + 
+				output += callCounter +
 						context.getString(R.string.messageFrom) 
 						+ common.getNameFor(missedCall.number) 
 						+ calledUserNumberPart 

@@ -6,7 +6,7 @@
     <!-- SMS -->
     <string name="messageMissedCall">\u0020Missed call</string>
     <string name="messageMissedCallSimpleLetterStart">\u0020missed call</string>
-    <string name="messageFrom">from\u0020</string>
+    <string name="messageFrom">\u0020from\u0020</string>
     <string name="messageOn">on\u0020</string>
     <string name="messageMissedCallDetails">Missed call details:\u0020</string>
     
