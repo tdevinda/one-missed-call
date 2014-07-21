@@ -128,7 +128,8 @@ public class MCACommon {
 		Intent openSMSIntent = new Intent(Intent.ACTION_VIEW);
 		openSMSIntent.setType("vnd.android-dir/mms-sms");
 		openSMSIntent.putExtra("address", messageSenderPort);
-		builder.setContentIntent(PendingIntent.getActivity(context, 0, openSMSIntent, PendingIntent.FLAG_ONE_SHOT));
+		
+		builder.setContentIntent(PendingIntent.getActivity(context, 0, openSMSIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 		builder.setSmallIcon(android.R.drawable.sym_call_missed);
 
 		if(missedCalls == null) {
@@ -139,7 +140,7 @@ public class MCACommon {
 		} else {
 
 			if(missedCalls.size() == 1) {
-				Log.i("MCA", "adding notification");
+				Log.i("MCA", "adding notification for "+ missedCalls.get(0).number);
 				builder.setContentText(
 						context.getString(R.string.notificationMissedCallFromSingle) + 
 						getNameFor(missedCalls.get(0).number));
@@ -152,7 +153,7 @@ public class MCACommon {
 				builder.addAction(
 						android.R.drawable.ic_menu_call, 
 						context.getString(R.string.notificationActionCallback), 
-						PendingIntent.getActivity(context, 0, callContactIntent, PendingIntent.FLAG_ONE_SHOT));
+						PendingIntent.getActivity(context, 0, callContactIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
 
 			} else if(missedCalls.size() == 2) {
@@ -187,6 +188,7 @@ public class MCACommon {
 
 		NotificationManager notificationManager = 
 				(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.cancelAll();
 		notificationManager.notify(0, notification);
 	}
 }

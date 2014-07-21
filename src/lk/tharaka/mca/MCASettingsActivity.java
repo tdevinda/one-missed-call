@@ -53,4 +53,10 @@ public class MCASettingsActivity extends PreferenceActivity {
 	 * 
 	 */
 	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		finish();
+	}
 }

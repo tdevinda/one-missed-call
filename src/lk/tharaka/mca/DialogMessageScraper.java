@@ -78,7 +78,12 @@ public class DialogMessageScraper implements MessageScraper {
 
 			String calledUserNumberPart = "";
 			if(preferences.isIncludeNumbersInSMS()) {
-				calledUserNumberPart = " ("+ missedCalls.get(0).number + ") ";
+				String replacedDialogNumber = missedCalls.get(0).number;
+				if(replacedDialogNumber.matches("\\d{9}")) {
+					replacedDialogNumber = "0" + replacedDialogNumber;
+				}
+				
+				calledUserNumberPart = " ("+ replacedDialogNumber + ") ";
 			} else {
 				calledUserNumberPart = " ";
 			}
