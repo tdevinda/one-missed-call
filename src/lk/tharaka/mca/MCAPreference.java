@@ -14,13 +14,15 @@ public class MCAPreference {
 	
 	private Context context;
 	
+	private MCAPreference() {};
+	
 	public MCAPreference(Context context) {
 		this.context = context;
 		
-		loadSettings(context);
+		loadSettings();
 	}
 	
-	private void loadSettings(Context context) {
+	private void loadSettings() {
 		SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 		appEnabled = settingsPrefs.getBoolean("pref_enableMCA", false);
 		replaceNumbersWithText = settingsPrefs.getBoolean("pref_useWordsForNumbers", false);

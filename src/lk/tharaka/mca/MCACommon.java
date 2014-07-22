@@ -1,8 +1,6 @@
 package lk.tharaka.mca;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -13,11 +11,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.AudioManager;
+import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Vibrator;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.ViewDebug.FlagToString;
 
 public class MCACommon {
 
@@ -129,9 +129,12 @@ public class MCACommon {
 		openSMSIntent.setType("vnd.android-dir/mms-sms");
 		openSMSIntent.putExtra("address", messageSenderPort);
 		
+		Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		
 		builder.setContentIntent(PendingIntent.getActivity(context, 0, openSMSIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 		builder.setSmallIcon(android.R.drawable.sym_call_missed);
-
+		builder.setSound(soundUri);
+		
 		if(missedCalls == null) {
 			builder.setContentText(
 					context.getString(R.string.notificationMissedCallsUnknown)); 
@@ -145,7 +148,7 @@ public class MCACommon {
 						context.getString(R.string.notificationMissedCallFromSingle) + 
 						getNameFor(missedCalls.get(0).number));
 
-
+				
 				Intent callContactIntent = new Intent(context, NotificationActionActivity.class);
 				callContactIntent.putExtra(EXTRA_NEXT_ACTION, ACTION_CALL_PHONE);
 				callContactIntent.putExtra(EXTRA_PHONE_NUMBER, missedCalls.get(0).number);
@@ -190,5 +193,24 @@ public class MCACommon {
 				(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.cancelAll();
 		notificationManager.notify(0, notification);
+		
+		
+		//vibrate and sound
+		Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+		AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+		
+		switch(audioManager.getRingerMode()) {
+		
+		case AudioManager.RINGER_MODE_NORMAL:
+			//ring
+		case AudioManager.RINGER_MODE_VIBRATE:
+			vibrator.vibrate(new long[]{0, 200, 100, 200},  -1);
+			break;
+		case AudioManager.RINGER_MODE_SILENT:
+			break;
+			
+		}
+		
+		
 	}
 }

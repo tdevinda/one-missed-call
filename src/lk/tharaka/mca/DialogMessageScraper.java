@@ -11,7 +11,9 @@ public class DialogMessageScraper implements MessageScraper {
 
 	private static String missedCallsFrom = " Missed call\\(s\\) from ";
 	private static String missedCallDetails = "Missed calls details";
-
+	private static String regexSingle = "(\\d)"+ missedCallsFrom + "(\\d+) on ([\\d\\w\\-: ]+M)(.*)";
+	private static String regexMultiple = "(\\d) from (\\d+) on ([\\d/: ]+)[,.] ?";
+	
 	private static String mcaSenderPort = "Alert";
 
 	MCAPreference preferences;
@@ -26,16 +28,18 @@ public class DialogMessageScraper implements MessageScraper {
 		if(sms.matches("^\\d"+ missedCallsFrom + ".*")) {
 			//single missed call mode
 			MissedCall oneCall = new MissedCall();
-			oneCall.count = Integer.parseInt(sms.replaceAll("(\\d)"+ missedCallsFrom + "(\\d+) on ([\\d\\w\\-: ]+M).*", "$1"));
-			oneCall.number = sms.replaceAll("(\\d)"+ missedCallsFrom + "(\\d+) on ([\\d\\w\\-: ]+M).*", "$2");
-			oneCall.date = sms.replaceAll("(\\d)"+ missedCallsFrom + "(\\d+) on ([\\d\\w\\-: ]+M).*", "$3");
-
+			oneCall.count = Integer.parseInt(sms.replaceAll(regexSingle, "$1"));
+			oneCall.number = sms.replaceAll(regexSingle, "$2");
+			oneCall.date = sms.replaceAll(regexSingle, "$3");
+			oneCall.ad = sms.replaceAll(regexSingle, "$4");
+			
 			Log.i("MCA", oneCall.toString());
+			
 			missedCalls.add(oneCall);
 
 		} else if(sms.matches("^" + missedCallDetails + ".*")) {
 			//multiple message format
-			Pattern multiMessagePattern = Pattern.compile("(\\d) from (\\d+) on ([\\d/: ]+)[,.] ?");
+			Pattern multiMessagePattern = Pattern.compile(regexMultiple);
 
 			Matcher matcher = multiMessagePattern.matcher(sms);
 			while(matcher.find()) {

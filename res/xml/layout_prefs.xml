@@ -22,6 +22,7 @@
         android:key="pref_blockAds"
         android:title="@string/pref_blockAdsTitle"
         android:summary="@string/pref_blockAdsDesc"
+        android:enabled="false"
         android:defaultValue="true" />
     
     <CheckBoxPreference

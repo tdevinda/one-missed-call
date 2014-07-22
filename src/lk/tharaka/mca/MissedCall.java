@@ -6,9 +6,10 @@ public class MissedCall {
 	public String name = "";
 	public int count;
 	public String date;
+	public String ad;
 	
 	@Override
 	public String toString() {
-		return "Number: "+ number +"Name: "+ name +"Count: "+ count +"Date:"+ date;
+		return "Number: "+ number +" Name: "+ name +" Count: "+ count +" Date:"+ date + " Ad:"+ ad;
 	}
 }
