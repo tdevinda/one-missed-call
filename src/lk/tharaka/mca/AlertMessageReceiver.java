@@ -26,7 +26,7 @@ public class AlertMessageReceiver extends BroadcastReceiver {
 				String phoneNumber = currentMessage.getDisplayOriginatingAddress();
 
 				Log.i("MCA", phoneNumber);
-				if(MCACommon.KNOWN_OPERATOR_MCA_SMSPORTS.matches(".*"+ phoneNumber + ".*")){
+				if(MCACommon.KNOWN_OPERATOR_MCA_SMSPORTS.contains(phoneNumber)){	
 					//means this came from a known missed call alert source number
 					//Log.i("MCA", currentMessage.getMessageBody());
 					abortBroadcast();

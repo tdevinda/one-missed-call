@@ -40,7 +40,7 @@ public class DialogMessageScraper implements MessageScraper {
 		} else if(sms.matches("^" + missedCallDetails + ".*")) {
 			//multiple message format
 			Pattern multiMessagePattern = Pattern.compile(regexMultiple);
-
+			
 			Matcher matcher = multiMessagePattern.matcher(sms);
 			while(matcher.find()) {
 

@@ -16,6 +16,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Vibrator;
 import android.provider.ContactsContract;
+import android.support.v4.app.NotificationCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -116,10 +117,10 @@ public class MCACommon {
 
 
 
-	@SuppressLint("NewApi")
+	
 	public void addNotification(ArrayList<MissedCall> missedCalls, String messageSenderPort) {
 
-		Notification.Builder builder = new Notification.Builder(context);
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 		//main title
 		builder.setContentTitle(context.getString(R.string.notificationTitle));
 		builder.setAutoCancel(true);
@@ -148,16 +149,16 @@ public class MCACommon {
 						context.getString(R.string.notificationMissedCallFromSingle) + 
 						getNameFor(missedCalls.get(0).number));
 
-				
-				Intent callContactIntent = new Intent(context, NotificationActionActivity.class);
-				callContactIntent.putExtra(EXTRA_NEXT_ACTION, ACTION_CALL_PHONE);
-				callContactIntent.putExtra(EXTRA_PHONE_NUMBER, missedCalls.get(0).number);
-
-				builder.addAction(
-						android.R.drawable.ic_menu_call, 
-						context.getString(R.string.notificationActionCallback), 
-						PendingIntent.getActivity(context, 0, callContactIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-
+				if(android.os.Build.VERSION.SDK_INT >= 16) {
+					Intent callContactIntent = new Intent(context, NotificationActionActivity.class);
+					callContactIntent.putExtra(EXTRA_NEXT_ACTION, ACTION_CALL_PHONE);
+					callContactIntent.putExtra(EXTRA_PHONE_NUMBER, missedCalls.get(0).number);
+	
+					builder.addAction(
+							android.R.drawable.ic_menu_call, 
+							context.getString(R.string.notificationActionCallback), 
+							PendingIntent.getActivity(context, 0, callContactIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+				}
 
 			} else if(missedCalls.size() == 2) {
 				Log.i("MCA", "adding notification 2");
