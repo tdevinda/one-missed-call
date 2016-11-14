@@ -1,17 +1,9 @@
 package lk.tharaka.mca.activities;
 
-import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.util.Log;
 
-import junit.framework.Assert;
-
-import lk.tharaka.mca.MissedCall;
 import lk.tharaka.mca.R;
-import lk.tharaka.mca.scrapers.DialogMessageScraper;
-import lk.tharaka.mca.scrapers.MessageScraper;
 
 public class MCASettingsActivity extends PreferenceActivity {
 	
@@ -42,7 +34,7 @@ public class MCASettingsActivity extends PreferenceActivity {
 		common.addNotification(missedCalls, scraper.getMissedCallAlertSMSSenderName());
 		*/
 
-		String sms = "*this is a test ad* 2 Missed call(s) from 773336050 on 14-Nov-16 12:03PM ";
+		/*String sms = "*this is a test ad* 2 Missed call(s) from 773336050 on 14-Nov-16 12:03PM ";
 		String multiSMS = "Missed calls details : 1 from 718390541 on 21/09 20:16, 1 from 382246260 on 21/09 20:16. *Signal Fresh Mint; brush twice a day & keep cavities away* ";
 		MessageScraper dialogScraper = new DialogMessageScraper();
 		ArrayList<MissedCall> missedCallsFromSMS = dialogScraper.getMissedCallsFromSMS(multiSMS);
@@ -51,6 +43,7 @@ public class MCASettingsActivity extends PreferenceActivity {
 			System.out.println(call.toString());
 
 		}
+		*/
 	}
 	
 	@Override
