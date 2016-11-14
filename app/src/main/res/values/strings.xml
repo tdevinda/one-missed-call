@@ -1,0 +1,49 @@
+<resources>
+
+    <string name="app_name">One missed call</string>
+
+
+    <!-- SMS -->
+    <string name="messageMissedCall">\u0020Missed call</string>
+    <string name="messageMissedCallSimpleLetterStart">\u0020missed call</string>
+    <string name="messageFrom">\u0020from\u0020</string>
+    <string name="messageOn">on\u0020</string>
+    <string name="messageMissedCallDetails">Missed call details:\u0020</string>
+
+
+    <!-- Notification -->
+    <string name="notificationTitle">Missed Calls Alert</string>
+    <string name="notificationActionCallback">Callback</string>
+    <string name="notificationActionView">View</string>
+    <string name="notificationMissedCallsUnknown">Missed calls alert</string>
+    <string name="notificationMissedCallFromSingle">\u0020Missed call from\u0020</string>
+    <string name="notificationMissedCallFromMultiple">Missed calls from\u0020</string>
+    <string name="notificationMissedCallAnd">\u0020and\u0020</string>
+    <string name="notificationMissedCallComma">,\u0020</string>
+    <string name="notificationMissedCallMore">more</string>
+    <string-array name="messageCounter">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+        <item>10</item>
+    </string-array>
+
+
+    <!-- Settings -->
+    <string name="pref_useWordsForCountersTitle">Display small call counters with words</string>
+    <string name="pref_useWordsForCountersDesc">SMS will contain One missed call instead of 1 Missed call for call counters below ten</string>
+    <string name="pref_callImmediatelyOrNotTitle">"Callback" dials immediately</string>
+    <string name="pref_callImmediatelyOrNotDesc">Immediately dial the contact if the callback option is selected or populate the dialer app with the number</string>
+    <string name="pref_includeNumberInSMSTitle">Include the number in the SMS</string>
+    <string name="pref_includeNumberInSMSDesc">Missed call alert SMS will have the number of the user in brackets in addition to the name</string>
+    <string name="pref_blockAdsTitle">Block operator\'s ads in the SMS</string>
+    <string name="pref_blockAdsDesc">Operators include an ad in the bottom of the alert SMS to pay their own bills. But, you have the option of seeing it or not.</string>
+    <string name="pref_enableMCATitle">App enabled</string>
+    <string name="pref_enableMCADesc">If you are getting blank SMS or any other unusual activity with the app, disable it for some time, it will be fixed with an update soon</string>
+</resources>
