@@ -64,10 +64,12 @@ public class MCACommon {
 		}
 		
 		
-		//TODO remove this. testing purpose.
-		//scraper = new MobitelMessageScraper();
-		
+
 		ArrayList<MissedCall> missedCalls = scraper.getMissedCallsFromSMS(sms);
+
+		/*
+			// we're no longer doing this. we will be posting the notification, and will insert
+			// data to our own screen from the sms db.
 		if(missedCalls != null) {
 			insertSMSInDatabase(
 					scraper.getMissedCallAlertSMSSenderName(), 
@@ -76,6 +78,7 @@ public class MCACommon {
 			//there is no implementation for this operator. we write the SMS back! But we must show the alert notification.
 			insertSMSInDatabase(scraper.getMissedCallAlertSMSSenderName(), sms);
 		}
+		*/
 
 		addNotification(missedCalls, scraper.getMissedCallAlertSMSSenderName());
 	}
