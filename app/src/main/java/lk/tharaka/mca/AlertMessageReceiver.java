@@ -28,9 +28,8 @@ public class AlertMessageReceiver extends BroadcastReceiver {
 				Log.i("MCA", phoneNumber);
 				if(MCACommon.KNOWN_OPERATOR_MCA_SMSPORTS.contains(phoneNumber)){	
 					//means this came from a known missed call alert source number
-					//Log.i("MCA", currentMessage.getMessageBody());
-					abortBroadcast();
-					//deleteSMS(context, currentMessage.getMessageBody(), phoneNumber);
+
+					//abortBroadcast();		//we dont do this anymore. we're not the default app.
 
 					MCACommon common = new MCACommon(context);
 					common.processSMS(
