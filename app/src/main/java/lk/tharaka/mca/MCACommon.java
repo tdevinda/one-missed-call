@@ -23,6 +23,7 @@ import lk.tharaka.mca.activities.NotificationActionActivity;
 import lk.tharaka.mca.scrapers.DialogMessageScraper;
 import lk.tharaka.mca.scrapers.MessageScraper;
 import lk.tharaka.mca.scrapers.MobitelMessageScraper;
+import lk.tharaka.mca.scrapers.NullScraper;
 
 public class MCACommon {
 

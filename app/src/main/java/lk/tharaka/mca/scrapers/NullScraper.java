@@ -1,9 +1,10 @@
-package lk.tharaka.mca;
+package lk.tharaka.mca.scrapers;
 
 import java.util.ArrayList;
 
 import android.content.Context;
 
+import lk.tharaka.mca.MissedCall;
 import lk.tharaka.mca.scrapers.MessageScraper;
 
 public class NullScraper implements MessageScraper {
