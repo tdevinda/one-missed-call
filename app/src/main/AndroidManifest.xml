@@ -24,7 +24,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activities.CallListActivity">
+        <activity android:name=".activities.CallListActivity"
+            >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 

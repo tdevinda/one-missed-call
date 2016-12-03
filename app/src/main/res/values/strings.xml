@@ -9,7 +9,8 @@
     <string name="messageFrom">\u0020from\u0020</string>
     <string name="messageOn">on\u0020</string>
     <string name="messageMissedCallDetails">Missed call details:\u0020</string>
-
+    <string name="messageListItemCallLabelMultiple">calls</string>
+    <string name="messageListItemCallLabelSingle">call</string>
 
     <!-- Notification -->
     <string name="notificationTitle">Missed Calls Alert</string>
@@ -21,6 +22,7 @@
     <string name="notificationMissedCallAnd">\u0020and\u0020</string>
     <string name="notificationMissedCallComma">,\u0020</string>
     <string name="notificationMissedCallMore">more</string>
+    <string name="listMissedCallSettings">Settings</string>
     <string-array name="messageCounter">
         <item>One</item>
         <item>Two</item>

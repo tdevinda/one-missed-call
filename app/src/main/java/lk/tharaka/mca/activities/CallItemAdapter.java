@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import lk.tharaka.mca.MCAPreference;
 import lk.tharaka.mca.MissedCall;
 import lk.tharaka.mca.R;
 
@@ -23,8 +24,15 @@ public class CallItemAdapter extends ArrayAdapter<MissedCall> {
     private int resourceID;
     private List<MissedCall> itemList;
 
+    private MCAPreference preference;
+
     public CallItemAdapter(Context context, int resource, List<MissedCall> objects) {
         super(context, resource, objects);
+        this.context = context;
+        this.resourceID = resource;
+        this.itemList = objects;
+
+        preference = new MCAPreference(context);
     }
 
 
@@ -36,9 +44,24 @@ public class CallItemAdapter extends ArrayAdapter<MissedCall> {
 
         View item = inflater.inflate(R.layout.item_missedcall, null);
         TextView nameTextView = (TextView) item.findViewById(R.id.text_item_callername);
-        nameTextView.setText("Test");
+        TextView callCounterTextView = (TextView) item.findViewById(R.id.text_item_count_counter);
+        TextView callCounterLabelTextView = (TextView) item.findViewById(R.id.text_item_count_label);
+        TextView timestampTextView = (TextView) item.findViewById(R.id.text_item_date);
 
+        int callCount = itemList.get(position).count;
 
+        nameTextView.setText(itemList.get(position).name);
+        callCounterTextView.setText(!preference.isIncludeNumbersInSMS()?
+                callCount + "":
+                context.getResources().getStringArray(R.array.messageCounter)[callCount - 1]);
+
+        callCounterLabelTextView.setText((itemList.get(position).count > 1)?
+                context.getString(R.string.messageListItemCallLabelMultiple):
+                context.getString(R.string.messageListItemCallLabelSingle));
+        timestampTextView.setText(itemList.get(position).date);
         return item;
+
     }
+
+
 }
