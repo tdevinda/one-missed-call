@@ -143,7 +143,7 @@ public class MCACommon {
 		Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
 		builder.setContentIntent(PendingIntent.getActivity(context, 0, openSMSIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-		builder.setSmallIcon(android.R.drawable.sym_call_missed);
+		builder.setSmallIcon(R.drawable.appicon);
 		builder.setSound(soundUri);
 
 		if (missedCalls == null) {

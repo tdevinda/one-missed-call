@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import lk.tharaka.mca.MCAPreference;
@@ -23,6 +25,7 @@ public class CallItemAdapter extends ArrayAdapter<MissedCall> {
     private Context context;
     private int resourceID;
     private List<MissedCall> itemList;
+    private List<MissedCall> groupedItemList;
 
     private MCAPreference preference;
 
@@ -61,6 +64,13 @@ public class CallItemAdapter extends ArrayAdapter<MissedCall> {
         timestampTextView.setText(itemList.get(position).date);
         return item;
 
+    }
+
+    private void createGroupedList() {
+        this.groupedItemList = new ArrayList<>();
+        for (MissedCall call : itemList) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-M");
+        }
     }
 
 
