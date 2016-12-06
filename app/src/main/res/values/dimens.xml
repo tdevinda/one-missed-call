@@ -8,4 +8,7 @@
     <dimen name="mcalist_count_date_label_sepratation">10dip</dimen>
     <dimen name="mcalist_callicon_name_separation">20dip</dimen>
     <dimen name="mcalist_height_of_item">64dip</dimen>
+
+
+    <color name="black_font">#000000</color>
 </resources>

@@ -9,6 +9,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/mcalist_callicon_name_separation"
         android:textSize="@dimen/mcalist_name_text_size"
+        android:textColor="@color/black_font"
         android:layout_toRightOf="@+id/image_item_callicon" />
 
     <TextView
@@ -17,6 +18,7 @@
         android:id="@+id/text_item_count_counter"
         android:layout_below="@id/text_item_callername"
         android:layout_alignLeft="@id/text_item_callername"
+        android:textColor="@color/black_font"
         />
 
     <TextView
@@ -26,6 +28,7 @@
         android:layout_below="@id/text_item_callername"
         android:layout_toRightOf="@id/text_item_count_counter"
         android:layout_marginLeft="@dimen/mcalist_count_value_label_sepratation"
+        android:textColor="@color/black_font"
         android:text="Calls"/>
 
     <TextView
@@ -35,13 +38,20 @@
         android:layout_below="@id/text_item_callername"
         android:layout_toRightOf="@id/text_item_count_label"
         android:layout_marginLeft="@dimen/mcalist_count_date_label_sepratation"
+        android:textColor="@color/black_font"
         android:text="2010-01-01 3:34pm"/>
 
     <ImageView
         android:id="@+id/image_item_callicon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_width="48dip"
+        android:layout_height="48dip"
         android:layout_alignParentLeft="true"
-        android:src="@android:drawable/stat_sys_phone_call"/>
+        android:src="@drawable/callicon"
+        />
+    <ImageView
+        android:layout_width="48dip"
+        android:layout_height="48dip"
+        android:id="@+id/image_item_msgicon"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/msgicon"/>
 </RelativeLayout>
