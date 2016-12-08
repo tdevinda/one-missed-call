@@ -1,5 +1,19 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">8dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="mcalist_divider_separation">1dip</dimen>
+
+    <dimen name="mcalist_title_margin_all">10dip</dimen>
+    <dimen name="mcalist_title_margin_bottom">15dip</dimen>
+
+    <dimen name="mcalist_name_text_size">24sp</dimen>
+    <dimen name="mcalist_count_value_label_sepratation">4dip</dimen>
+    <dimen name="mcalist_count_date_label_sepratation">10dip</dimen>
+    <dimen name="mcalist_callicon_name_separation">20dip</dimen>
+    <dimen name="mcalist_height_of_item">64dip</dimen>
+
+    <color name="black_font">#000000</color>
+    <color name="list_title_text_color">#F0F0EC</color>
 </resources>

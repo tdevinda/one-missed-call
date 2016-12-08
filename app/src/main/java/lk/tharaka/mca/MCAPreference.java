@@ -25,7 +25,7 @@ public class MCAPreference {
 	private void loadSettings() {
 		SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 		appEnabled = settingsPrefs.getBoolean("pref_enableMCA", false);
-		replaceNumbersWithText = settingsPrefs.getBoolean("pref_useWordsForNumbers", false);
+		replaceNumbersWithText = settingsPrefs.getBoolean("pref_useWordsForNumbers", true);
 		callImmediatelyWhenClicked = settingsPrefs.getBoolean("pref_callbackOption", true);
 		includeNumbersInSMS = settingsPrefs.getBoolean("pref_includeNumber", true);
 		blockOperatorAds = settingsPrefs.getBoolean("pref_blockAds", true);
