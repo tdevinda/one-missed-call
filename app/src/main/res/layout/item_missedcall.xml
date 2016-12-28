@@ -61,6 +61,7 @@
             android:layout_height="48dip"
             android:id="@+id/image_item_msgicon"
             android:layout_alignParentRight="true"
-            android:src="@drawable/msgicon"/>
+            android:src="@drawable/msgicon"
+            android:visibility="invisible"/>
     </RelativeLayout>
 </RelativeLayout>
