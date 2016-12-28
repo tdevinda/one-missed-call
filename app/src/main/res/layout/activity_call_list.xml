@@ -8,11 +8,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="lk.tharaka.mca.activities.CallListActivity">
+    tools:context="lk.tharaka.mca.activities.CallListActivity"
+    >
 
     <ListView
+        android:id="@+id/listView_callList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:dividerHeight="@dimen/mcalist_divider_separation"
+        android:divider="@null" />
 </RelativeLayout>
