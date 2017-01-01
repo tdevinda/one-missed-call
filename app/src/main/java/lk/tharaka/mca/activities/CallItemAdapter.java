@@ -47,6 +47,7 @@ public class CallItemAdapter extends ArrayAdapter<MissedCall> {
 
         View item = inflater.inflate(R.layout.item_missedcall, null);
         TextView nameTextView = (TextView) item.findViewById(R.id.text_item_callername);
+        TextView numberTextView = (TextView) item.findViewById(R.id.text_item_callernumber);
         TextView callCounterTextView = (TextView) item.findViewById(R.id.text_item_count_counter);
         TextView callCounterLabelTextView = (TextView) item.findViewById(R.id.text_item_count_label);
         TextView timestampTextView = (TextView) item.findViewById(R.id.text_item_date);
@@ -54,7 +55,13 @@ public class CallItemAdapter extends ArrayAdapter<MissedCall> {
         int callCount = itemList.get(position).count;
 
         nameTextView.setText(itemList.get(position).name);
-        callCounterTextView.setText(!preference.isIncludeNumbersInSMS()?
+
+        if(preference.isIncludeNumbersInSMS()) {
+            numberTextView.setVisibility(View.VISIBLE);
+            numberTextView.setText(itemList.get(position).number);
+        }
+
+        callCounterTextView.setText(!preference.isReplaceNumbersWithText()?
                 callCount + "":
                 context.getResources().getStringArray(R.array.messageCounter)[callCount - 1]);
 

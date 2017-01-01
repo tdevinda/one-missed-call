@@ -59,7 +59,11 @@ public class CallListActivity extends AppCompatActivity {
         List<MissedCall> missedCalls = new ArrayList<>();
         MCACommon common = new MCACommon(getApplicationContext());
 
-        Cursor smsCursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, "address=?", new String[] {"Alert"}, null);
+        Cursor smsCursor = getContentResolver().query(
+                Uri.parse("content://sms/inbox"),
+                null,
+                "address=?", new String[] {"Alert"},
+                null);
 
         smsCursor.moveToFirst();
 
@@ -72,6 +76,7 @@ public class CallListActivity extends AppCompatActivity {
             missedCalls.addAll(currentSMSCalls);
             smsCursor.moveToNext();
         }
+        smsCursor.close();
 
         return  missedCalls;
 
