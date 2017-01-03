@@ -18,7 +18,22 @@
             android:layout_marginLeft="@dimen/mcalist_callicon_name_separation"
             android:textSize="@dimen/mcalist_name_text_size"
             android:textColor="@color/black_font"
+            android:text="Caller One"
             android:layout_toRightOf="@+id/image_item_callicon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_item_callernumber"
+            android:layout_marginLeft="@dimen/mcalist_callicon_name_separation"
+            android:textSize="@dimen/mcalist_number_text_size"
+            android:textColor="@color/black_font"
+            android:text="077123123"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"
+            android:layout_below="@id/text_item_callername"/>
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,6 +42,7 @@
             android:layout_below="@id/text_item_callername"
             android:layout_alignLeft="@id/text_item_callername"
             android:textColor="@color/black_font"
+            android:text="Two"
             />
 
         <TextView

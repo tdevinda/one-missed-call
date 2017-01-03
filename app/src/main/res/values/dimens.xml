@@ -9,6 +9,7 @@
     <dimen name="mcalist_title_margin_bottom">15dip</dimen>
 
     <dimen name="mcalist_name_text_size">24sp</dimen>
+    <dimen name="mcalist_number_text_size">16sp</dimen>
     <dimen name="mcalist_count_value_label_sepratation">4dip</dimen>
     <dimen name="mcalist_count_date_label_sepratation">10dip</dimen>
     <dimen name="mcalist_callicon_name_separation">20dip</dimen>

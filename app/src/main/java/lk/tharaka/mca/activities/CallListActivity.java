@@ -32,10 +32,15 @@ public class CallListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_list);
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         SMSTask task = new SMSTask();
         task.execute();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,7 +64,11 @@ public class CallListActivity extends AppCompatActivity {
         List<MissedCall> missedCalls = new ArrayList<>();
         MCACommon common = new MCACommon(getApplicationContext());
 
-        Cursor smsCursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, "address=?", new String[] {"Alert"}, null);
+        Cursor smsCursor = getContentResolver().query(
+                Uri.parse("content://sms/inbox"),
+                null,
+                "address=?", new String[] {"Alert"},
+                null);
 
         smsCursor.moveToFirst();
 
@@ -72,6 +81,7 @@ public class CallListActivity extends AppCompatActivity {
             missedCalls.addAll(currentSMSCalls);
             smsCursor.moveToNext();
         }
+        smsCursor.close();
 
         return  missedCalls;
 
