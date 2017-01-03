@@ -32,10 +32,15 @@ public class CallListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_list);
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         SMSTask task = new SMSTask();
         task.execute();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
