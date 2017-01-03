@@ -75,20 +75,33 @@ public class MCACommon {
      * @return
      */
 	public List<MissedCall> extractMissedCallsFromSMS(String sms, String from, String to) {
-		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		String destinationNumberPrefix = null;
+		if(to != null) {
+			destinationNumberPrefix = to.replaceAll("\\+?(\\d{4}).+", "$1");
+			Log.i("MCA", "destination operator = " + destinationNumberPrefix);
+		}
 
-		String operator = tm.getNetworkOperator();
-
-		String destinationSIMOperator = to.replaceAll("\\+?(\\d{4}).+", "$1");
-		Log.i("MCA", "destination operator = " + destinationSIMOperator);
-
-		if (operator.matches(MessageScraper.OPERATOR_DIALOG)) {
-			scraper = new DialogMessageScraper();
-
-		} else if (operator.matches(MessageScraper.OPERATOR_MOBITEL)) {
-			scraper = new MobitelMessageScraper();
+		if (destinationNumberPrefix != null) {
+			if (destinationNumberPrefix.matches("947[67]")) {
+				scraper = new DialogMessageScraper();
+			} else if (destinationNumberPrefix.matches("947[01]")) {
+				scraper = new MobitelMessageScraper();
+			} else {
+				scraper = new NullScraper(from);
+			}
 		} else {
-			scraper = new NullScraper(from);
+
+			TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+			String operator = tm.getNetworkOperator();
+
+			if (operator.matches(MessageScraper.OPERATOR_DIALOG)) {
+				scraper = new DialogMessageScraper();
+
+			} else if (operator.matches(MessageScraper.OPERATOR_MOBITEL)) {
+				scraper = new MobitelMessageScraper();
+			} else {
+				scraper = new NullScraper(from);
+			}
 		}
 
 		return scraper.getMissedCallsFromSMS(sms);
