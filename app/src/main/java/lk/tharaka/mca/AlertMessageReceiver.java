@@ -18,14 +18,30 @@ public class AlertMessageReceiver extends BroadcastReceiver {
 		//check if the app is enabled in settings.
 		if(prefs.isAppEnabled()) {
 			Bundle bundle = intent.getExtras();
-			Object[] pdusObj = (Object[]) bundle.get("pdus");
+            /*
+            12-29 13:25:42.477 13045-13045/lk.tharaka.mca D/MCA: android.telephony.extra.SUBSCRIPTION_INDEX(class java.lang.Integer)=1
+            12-29 13:25:42.477 13045-13045/lk.tharaka.mca D/MCA: format(class java.lang.String)=3gpp
+            12-29 13:25:42.478 13045-13045/lk.tharaka.mca D/MCA: pdus(class [[B)=[[B@5c74dc
+            12-29 13:25:42.479 13045-13045/lk.tharaka.mca D/MCA: slot(class java.lang.Integer)=0
+            12-29 13:25:42.479 13045-13045/lk.tharaka.mca D/MCA: phone(class java.lang.Integer)=0
+            12-29 13:25:42.480 13045-13045/lk.tharaka.mca D/MCA: subscription(class java.lang.Integer)=1
+             */
+            Object[] pdusObj = (Object[]) bundle.get("pdus");
 
 			for (int i = 0; i < pdusObj.length; i++) {
 
-				SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
-				String phoneNumber = currentMessage.getDisplayOriginatingAddress();
+                SmsMessage currentMessage = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i], bundle.getString("format"));
+                } else {
+                    currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
 
-				Log.i("MCA", phoneNumber);
+                }
+
+                String phoneNumber = currentMessage.getDisplayOriginatingAddress();
+                int simSlot = bundle.getInt("slot", MCACommon.SIM_SLOT_DEFAULT);
+
+//                Log.i("MCA", phoneNumber);
 				if(MCACommon.KNOWN_OPERATOR_MCA_SMSPORTS.contains(phoneNumber)){	
 					//means this came from a known missed call alert source number
 
@@ -35,7 +51,8 @@ public class AlertMessageReceiver extends BroadcastReceiver {
 					common.processSMS(
 							currentMessage.getMessageBody(), 
 							currentMessage.getDisplayOriginatingAddress(),
-							currentMessage.getServiceCenterAddress());		//we have to use the service center to identify the destination 
+							currentMessage.getServiceCenterAddress(),
+                            simSlot);		//we have to use the service center to identify the destination
 
 				}
 			}

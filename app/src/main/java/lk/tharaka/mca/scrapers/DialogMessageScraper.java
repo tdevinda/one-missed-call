@@ -19,7 +19,7 @@ public class DialogMessageScraper implements MessageScraper {
 	private static String regexSingle = "(\\*.+\\*.*)?(\\d)" + missedCallsFrom + "(\\d+) on ([\\d\\w\\-: ]+M)(.*)";
 	private static String regexMultiple = "(\\d) from (\\d+) on ([\\d/: ]+)[,.] ?";
 	
-	private static String mcaSenderPort = "Alert";
+	private static String mcaSenderPort = "112";
 
 	MCAPreference preferences;
 
