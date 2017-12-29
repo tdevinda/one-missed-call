@@ -1,7 +1,7 @@
 package lk.tharaka.mca;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -17,6 +17,8 @@ import android.net.Uri;
 import android.os.Vibrator;
 import android.provider.ContactsContract;
 import android.support.v4.app.NotificationCompat;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -33,7 +35,7 @@ public class MCACommon {
 	public static final String EXTRA_PHONE_NUMBER = "mca.phoneNumber";
 
 	public static final String KNOWN_OPERATOR_MCA_SMSPORTS = "Alert";
-
+    public static final Integer SIM_SLOT_DEFAULT = -1;
 
 	private Context context;
 	private MessageScraper scraper;
@@ -46,10 +48,10 @@ public class MCACommon {
 		context = ctx;
 	}
 
-	public void processSMS(String sms, String from, String to) {
+	public void processSMS(String sms, String from, String to, int simSlot) {
 
 
-		List<MissedCall> missedCalls = extractMissedCallsFromSMS(sms, from, to);
+		List<MissedCall> missedCalls = extractMissedCallsFromSMS(sms, from, to, simSlot);
 
 		/*
 			// we're no longer doing this. we will be posting the notification, and will insert
@@ -72,9 +74,10 @@ public class MCACommon {
 	 * @param sms
 	 * @param from
 	 * @param to
+     * @param simSlotIndex
      * @return
      */
-	public List<MissedCall> extractMissedCallsFromSMS(String sms, String from, String to) {
+	public List<MissedCall> extractMissedCallsFromSMS(String sms, String from, String to, int simSlotIndex) {
 		String destinationNumberPrefix = null;
 		if(to != null) {
 			destinationNumberPrefix = to.replaceAll("\\+?(\\d{4}).+", "$1");
@@ -91,8 +94,17 @@ public class MCACommon {
 			}
 		} else {
 
-			TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-			String operator = tm.getNetworkOperator();
+            //we have to decide this from the slot index now.
+            String operator = "";
+            if (simSlotIndex == SIM_SLOT_DEFAULT || android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
+                //this is not a dual sim scenareo. use TelephonyManager to decide
+                TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+                operator = tm.getNetworkOperator();
+            } else {
+                SubscriptionManager subscriptionManager = (SubscriptionManager) context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+                SubscriptionInfo info = subscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(simSlotIndex);
+                operator = String.format(Locale.US, "%d%02d", info.getMcc(), info.getMnc());
+            }
 
 			if (operator.matches(MessageScraper.OPERATOR_DIALOG)) {
 				scraper = new DialogMessageScraper();

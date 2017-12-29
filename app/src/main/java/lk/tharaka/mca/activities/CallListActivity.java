@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.provider.Telephony;
-import android.service.carrier.CarrierMessagingService;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lk.tharaka.mca.MCACommon;
-import lk.tharaka.mca.MCAPreference;
 import lk.tharaka.mca.MissedCall;
 import lk.tharaka.mca.R;
 
@@ -76,7 +72,7 @@ public class CallListActivity extends AppCompatActivity {
             List<MissedCall> currentSMSCalls = common.extractMissedCallsFromSMS(
                     smsCursor.getString(smsCursor.getColumnIndex("body")),
                     smsCursor.getString(smsCursor.getColumnIndex("address")),
-                    smsCursor.getString(smsCursor.getColumnIndex("service_center")));
+                    smsCursor.getString(smsCursor.getColumnIndex("service_center")), 0);
 
             missedCalls.addAll(currentSMSCalls);
             smsCursor.moveToNext();

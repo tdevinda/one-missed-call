@@ -1,7 +1,8 @@
 package lk.tharaka.mca;
 
 public class MissedCall {
-	
+
+	public int simSlot = 0;
 	public String number;
 	public String name = "";
 	public int count;
